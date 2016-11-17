@@ -14,11 +14,13 @@ class Automate
 public:
 	Automate();
 	~Automate();
+
+	void creerAutomate(string nomFichier);
 	
 private:
 	set<Etat> etats;
-	set<Etat> etatsFinaux;
-	set<Transition> transitions;
+	//set<Etat> etatsFinaux;
+	set<char> transitions;
 };
 
 #endif // !AUTOMATE_H
