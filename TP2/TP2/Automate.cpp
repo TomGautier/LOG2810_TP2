@@ -9,6 +9,12 @@ Automate::~Automate()
 {
 }
 
+set<Etat> Automate::getEtats()
+{
+	return etats;
+}
+
+
 void Automate::creerAutomate(const string& nomFichier)
 {
 	ifstream zone;
@@ -37,7 +43,7 @@ void Automate::creerAutomate(const string& nomFichier)
 					}
 					else // palier au probleme d'ajout d'une transition vide pour les etats finaux
 					{
-						transitions.insert(line[i]);
+						//etat.addTransition(Transition(line[i], etat, Etat(line.substr(0, i + 1))));
 					}
 		
 					etats.insert(etat);

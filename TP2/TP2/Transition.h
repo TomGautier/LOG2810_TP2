@@ -3,14 +3,24 @@
 #ifndef TRANSITION_H
 #define TRANSITION_H
 
+#include "Etat.h"
+
 class Transition
 {
 public : 
 	Transition();
 	~Transition();
 
+	Transition(char, Etat*, Etat*);
+
+	char getSortie() const;
+
+	bool operator<(const Transition & transition) const;
+
 private:
-	char transition;
+	char sortie_;
+	Etat etatEntrant_;
+	Etat etatSortant_;
 };
 
 #endif // !TRANSITION_H

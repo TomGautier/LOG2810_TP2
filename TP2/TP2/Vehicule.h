@@ -21,10 +21,16 @@ public:
 	void setCode(const string&);
 	void setOccupation(bool);
 
+	void incrementerCompteurTrajetsOccupes();
+	void incrementerCompteurTrajetsVides();
+
 private:
 	Automate* automate_;
 	string code_;
 	bool occupation_;
+
+	int nTrajetsOccupes_;
+	int nTrajetsVides_;
 };
 
 #endif // !VEHICULE_H
