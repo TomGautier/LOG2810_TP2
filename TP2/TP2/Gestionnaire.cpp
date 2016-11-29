@@ -26,6 +26,7 @@ std::vector<Automate> Gestionnaire::getAutomates() const
 	return std::vector<Automate>();
 }
 
-void Gestionnaire::addAutomate(const Automate &)
+void Gestionnaire::addAutomate(const Automate & automate)
 {
+	automates_.push_back(automate);
 }

@@ -22,7 +22,6 @@ public:
 	void addAutomate(const Automate&);
 private:
 	std::vector<Automate> automates_;
-	
 };
 
 #endif // !GESTIONNAIRE_H
