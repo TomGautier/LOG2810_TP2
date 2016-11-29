@@ -18,11 +18,18 @@ public:
 	Automate();
 	~Automate();
 
+	set<Etat> getEtats();
+	set<char> getTransition();
+
+	Etat* parcoursAutomate(const string& mot);
+
 	void creerAutomate(const string& nomFichier);
 	
 private:
 	set<Etat> etats;
-	set<char> transitions;
+
+	
+	//set<char> transitions;
 };
 
 #endif // !AUTOMATE_H

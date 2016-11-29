@@ -143,11 +143,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Automate.cpp" />
+    <ClCompile Include="Etat.cpp" />
+    <ClCompile Include="Gestionnaire.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Transition.cpp" />
+    <ClCompile Include="Utilisateur.cpp" />
+    <ClCompile Include="Vehicule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Automate.h" />
     <ClInclude Include="Etat.h" />
+    <ClInclude Include="Gestionnaire.h" />
     <ClInclude Include="Transition.h" />
     <ClInclude Include="Utilisateur.h" />
     <ClInclude Include="Vehicule.h" />

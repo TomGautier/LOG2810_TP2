@@ -6,6 +6,9 @@
 using namespace std;
 
 #include <string>
+#include <set>
+
+class Transition;
 
 class Etat
 {
@@ -18,13 +21,16 @@ public:
 	void setFinal(bool final);
 	void setCode(const string& code);
 
-	string getCode();
-	bool getFinal();
+	string getCode() const;
+	bool getFinal()const;
+
+	void addTransition(Transition&);
 
 	bool operator<(const Etat& etat) const;
 private:
 	string code_;
 	bool final_;
+	set<Transition> transitions_;
 };
 
 #endif // !ETAT_H

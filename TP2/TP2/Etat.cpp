@@ -32,14 +32,19 @@ void Etat::setCode(const string & code)
 	code_ = code;
 }
 
-string Etat::getCode()
+string Etat::getCode() const
 {
 	return code_;
 }
 
-bool Etat::getFinal()
+bool Etat::getFinal() const
 {
 	return final_;
+}
+
+void Etat::addTransition(Transition & transition)
+{
+	transitions_.insert(transition);
 }
 
 // Necessaire pour les set

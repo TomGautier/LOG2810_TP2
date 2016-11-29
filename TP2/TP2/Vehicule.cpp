@@ -11,7 +11,7 @@ Vehicule::~Vehicule()
 }
 
 Vehicule::Vehicule(Automate * automate, const string & code, bool occupation)
-	: code_(code), occupation_(occupation)
+	: code_(code), occupation_(occupation), nTrajetsOccupes_(0), nTrajetsVides_(0)
 {
 	automate_ = automate;
 }
@@ -44,4 +44,14 @@ void Vehicule::setCode(const string & code)
 void Vehicule::setOccupation(bool occupation)
 {
 	occupation_ = occupation;
+}
+
+void Vehicule::incrementerCompteurTrajetsOccupes()
+{
+	nTrajetsOccupes_++;
+}
+
+void Vehicule::incrementerCompteurTrajetsVides()
+{
+	nTrajetsVides_++;
 }
