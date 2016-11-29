@@ -14,11 +14,12 @@ public:
 	Gestionnaire();
 	~Gestionnaire();
 	
-	Automate creerLexiques(string nomFichier);
+	void creerLexiques(const string& nomFichier);
 	void equilibrerFlotte();
 	void lancerSimulation();
 	
 	std::vector<Automate> getAutomates() const;
+	Automate* getAutomate(const string& code);
 	void addAutomate(const Automate&);
 private:
 	std::vector<Automate> automates_;

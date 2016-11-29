@@ -5,17 +5,26 @@
 
 using namespace std;
 
+#include <string>
+
 class Etat
 {
 public: 
-	Etat(); // initialiser final a false
+	Etat();
 	~Etat();
 	Etat(string& code);
+	Etat(const Etat&);
 
 	void setFinal(bool final);
+	void setCode(const string& code);
+
+	string getCode();
+	bool getFinal();
+
+	bool operator<(const Etat& etat) const;
 private:
-	string code;
-	bool final;
+	string code_;
+	bool final_;
 };
 
 #endif // !ETAT_H

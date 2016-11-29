@@ -4,6 +4,9 @@
 #define AUTOMATE_H
 
 #include <Set>
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "Etat.h"
 #include "Transition.h"
 
@@ -15,11 +18,10 @@ public:
 	Automate();
 	~Automate();
 
-	void creerAutomate(string nomFichier);
+	void creerAutomate(const string& nomFichier);
 	
 private:
 	set<Etat> etats;
-	//set<Etat> etatsFinaux;
 	set<char> transitions;
 };
 

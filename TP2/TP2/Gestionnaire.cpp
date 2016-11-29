@@ -8,9 +8,11 @@ Gestionnaire::~Gestionnaire()
 {
 }
 
-Automate Gestionnaire::creerLexiques(string nomFichier)
+void Gestionnaire::creerLexiques(const string& nomFichier)
 {
-	return Automate();
+	Automate automate = Automate();
+	automate.creerAutomate(nomFichier);
+	addAutomate(automate);
 }
 
 void Gestionnaire::equilibrerFlotte()

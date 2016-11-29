@@ -1,5 +1,6 @@
 #include "Automate.h"
 
+
 Automate::Automate()
 {
 }
@@ -8,31 +9,42 @@ Automate::~Automate()
 {
 }
 
-void Automate::creerAutomate(string nomFichier)
+void Automate::creerAutomate(const string& nomFichier)
 {
-	if (false)
+	ifstream zone;
+	zone.open(nomFichier);
+
+	if (zone.fail())
+		cout << "Erreur d ouverture\n";
+	else
 	{
-		//verif ouverture fichier
-	}
-	while (!fichier.empty()) // tant que fichier pas termine
-	{
-		string line = fichier.getline();
-		for (unsigned int i = 0; i < line.size(); i++)
+		while (zone.peek() != EOF) // tant que fichier pas termine
 		{
-			if (line[i] != ' ')
+			string line;
+			getline(zone, line, '\n');
+
+			for (unsigned int i = 1; i <= line.size(); i++)
 			{
-				Etat etat = Etat(line.substr(0, line[i]));
-				if (i = line.size() - 1)
+				if (line[i] != ' ')
 				{
-					etat.setFinal(true);
+					string subLine = line.substr(0, i);
+					Etat etat = Etat(subLine);
+					
+					// Si on a les 6 caracteres du code, l'etat est final
+					if (i == line.size())
+					{
+						etat.setFinal(true);
+					}
+					else // palier au probleme d'ajout d'une transition vide pour les etats finaux
+					{
+						transitions.insert(line[i]);
+					}
+		
+					etats.insert(etat);
 				}
-
-				etats.insert(etat);
-				transitions.insert(line[i]);
 			}
-		}
-	
-	}
 
+		}
+	}
 }
 
