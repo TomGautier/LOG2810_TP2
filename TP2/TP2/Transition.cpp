@@ -8,8 +8,11 @@ Transition::~Transition()
 {
 }
 
-Transition::Transition(char, Etat*, Etat*)
+Transition::Transition(char c, Etat In, Etat Out)
 {
+	sortie_ = c;
+	etatEntrant_ = In;
+	etatSortant_ = Out;
 }
 
 char Transition::getSortie() const

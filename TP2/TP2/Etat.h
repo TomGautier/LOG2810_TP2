@@ -8,7 +8,6 @@ using namespace std;
 #include <string>
 #include <set>
 
-#include "Transition.h"
 
 class Transition;
 
@@ -18,6 +17,8 @@ public:
 	Etat();
 	~Etat();
 	Etat(string& code);
+	Etat(string& code, set<Transition*> transitions);
+
 	Etat(const Etat&);
 
 	void setFinal(bool final);
@@ -25,14 +26,15 @@ public:
 
 	string getCode() const;
 	bool getFinal()const;
+	set<Transition*> getTransitions() const;
 
-	void addTransition(Transition&);
+	void addTransition(Transition*);
 
 	bool operator<(const Etat& etat) const;
 private:
 	string code_;
 	bool final_;
-	set<Transition> transitions_;
+	set<Transition*> transitions_;
 };
 
 #endif // !ETAT_H

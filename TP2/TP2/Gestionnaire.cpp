@@ -17,6 +17,21 @@ void Gestionnaire::creerLexiques(const string& nomFichier)
 
 void Gestionnaire::equilibrerFlotte()
 {
+	
+	/*
+	int i = 0;
+	string mot = "";
+	while (mot.length() != user.getdestination().length()) {
+		auto it = automates_[i].getEtats().begin();
+		
+		//premier caractere
+		while (it != automates_[i].getEtats().end()) {
+			if (user->getDestination()[0] == it->getCode()[0]) {
+				mot = it->getCode()[0];
+			}
+		}
+
+		*/
 }
 
 void Gestionnaire::lancerSimulation()

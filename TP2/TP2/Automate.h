@@ -19,17 +19,15 @@ public:
 	~Automate();
 
 	set<Etat> getEtats();
-	set<char> getTransition();
+	//set<char> getTransition();
 
-	Etat* parcoursAutomate(const string& mot);
+	//Etat* parcoursAutomate(const string& mot);
 
 	void creerAutomate(const string& nomFichier);
 	
 private:
 	set<Etat> etats;
-
-	
-	//set<char> transitions;
+	set<Transition> transitions;
 };
 
 #endif // !AUTOMATE_H

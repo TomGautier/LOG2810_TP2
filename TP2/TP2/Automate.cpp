@@ -43,9 +43,12 @@ void Automate::creerAutomate(const string& nomFichier)
 					}
 					else // palier au probleme d'ajout d'une transition vide pour les etats finaux
 					{
-						//etat.addTransition(Transition(line[i], etat, Etat(line.substr(0, i + 1))));
+						Etat etatSortant = Etat(line.substr(0, i + 1));
+						Transition* transition = new Transition(line[i], etat, etatSortant);
+						etat.addTransition(transition);
+						transitions.insert(*transition);
 					}
-		
+					
 					etats.insert(etat);
 				}
 			}

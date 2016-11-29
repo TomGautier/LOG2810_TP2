@@ -16,6 +16,11 @@ Etat::Etat(string& code)
 {
 }
 
+Etat::Etat(string& code, set<Transition*> transitions) {
+	code_ = code;
+	transitions_ = transitions;
+}
+
 Etat::Etat(const Etat& etat)
 {
 	code_ = etat.code_;
@@ -42,7 +47,12 @@ bool Etat::getFinal() const
 	return final_;
 }
 
-void Etat::addTransition(Transition & transition)
+set<Transition*> Etat::getTransitions() const
+{
+	return transitions_;
+}
+
+void Etat::addTransition(Transition* transition)
 {
 	transitions_.insert(transition);
 }

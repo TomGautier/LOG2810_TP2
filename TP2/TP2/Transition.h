@@ -11,7 +11,7 @@ public :
 	Transition();
 	~Transition();
 
-	Transition(char, Etat*, Etat*);
+	Transition(char, Etat, Etat);
 
 	char getSortie() const;
 
