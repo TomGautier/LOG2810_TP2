@@ -22,14 +22,15 @@ void Gestionnaire::creerLexiques(const string& nomFichier)
 
 void Gestionnaire::creerVehicule(const string& code) 
 {
-	Automate* automate = trouverAutomate(code);
-	if (automate != nullptr)
-			vehicules_.push_back(new Vehicule(automate,code, false));
+	Automate* zone = trouverAutomate(code);
+	if (zone != nullptr)
+		vehicules_.push_back(new Vehicule(zone, code, false));
+	else
+		cout << "Code inexistant." << endl;
 }
 
 void Gestionnaire::creerUtilisateur(const string& origine, const string& destination ) {
-	Utilisateur* utilisateur = new Utilisateur(origine, destination);
-	utilisateurs_.push_back(utilisateur);
+	utilisateurs_.push_back(new Utilisateur(origine, destination));
 }
 
 void Gestionnaire::equilibrerFlotte()
@@ -68,7 +69,7 @@ void Gestionnaire::lancerSimulation()
 Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
 {
 	Vehicule* vehicule = nullptr;
-	Automate* automate = trouverAutomate(user->getOrigine());
+	Automate* zone = trouverAutomate(user->getOrigine());
 
 	//Trouver une voiture dans le voisinage du client
 	for (unsigned int i = 0; i < vehicules_.size();i++) {
@@ -79,7 +80,13 @@ Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
 	//Assigner la premiere voiture disponible dans la zone du client
 	if (vehicule == nullptr) {
 		for (unsigned int i = 0; i < vehicules_.size();i++) {
-			if (vehicules_[i]->getZone() == automate && !vehicules_[i]->isOccupied())
+
+			/*
+			
+			//TODO : comparaison de deux pointeurs : ne marchera pas.
+			
+			*/
+			if (vehicules_[i]->getZone() == zone && !vehicules_[i]->isOccupied())
 				vehicule = vehicules_[i];
 		}
 	}
@@ -112,9 +119,10 @@ void Gestionnaire::addAutomate(Automate* automate)
 Automate* Gestionnaire::trouverAutomate(const string& code) const{
 	
 	Automate* automate = nullptr;
-	for (unsigned int i = 0; i < automates_.size(); i++) {
+
+	for (unsigned int i = 0; i < automates_.size(); i++)
 		automate = automates_[i]->parcoursAutomate(code);
-	}
+
 	return automate;
 
 }

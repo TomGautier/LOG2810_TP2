@@ -25,7 +25,7 @@ public:
 	void incrementerCompteurTrajetsVides();
 
 private:
-	Automate* automate_;
+	Automate* zone_;
 	string code_;
 	bool occupation_;
 

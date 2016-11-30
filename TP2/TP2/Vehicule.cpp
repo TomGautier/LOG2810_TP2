@@ -2,23 +2,25 @@
 
 Vehicule::Vehicule()
 {
-	automate_ = nullptr;
+	zone_ = nullptr;
 }
 
 Vehicule::~Vehicule()
 {
-	delete automate_;
+	zone_->decrementerNbVehicules();
+	zone_ = nullptr;
 }
 
 Vehicule::Vehicule(Automate* automate,const string & code, bool occupation)
 	: code_(code), occupation_(occupation), nTrajetsOccupes_(0), nTrajetsVides_(0)
 {
-	automate_ = automate;
+	zone_ = automate;
+	automate->incrementerNbVehicules();
 }
 
 Automate * Vehicule::getZone() const
 {
-	return automate_;
+	return zone_;
 }
 
 string Vehicule::getCode() const
@@ -33,7 +35,7 @@ bool Vehicule::isOccupied() const
 
 void Vehicule::setZone(Automate* automate)
 {
-	automate_ = automate;
+	zone_ = automate;
 }
 
 void Vehicule::setCode(const string & code)

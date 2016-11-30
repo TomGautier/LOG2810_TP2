@@ -18,5 +18,8 @@ int main()
 
 	Automate* automate = automates[0]->parcoursAutomate("H1A 0A1");
 
+	/*Utilises pour tests manuels:*/
+	//Vehicule* vehicule1 = new Vehicule()
+
 	cout << "Voila!" << endl;
 }
