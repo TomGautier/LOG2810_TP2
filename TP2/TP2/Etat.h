@@ -17,24 +17,25 @@ public:
 	Etat();
 	~Etat();
 	Etat(string& code);
-	Etat(string& code, set<Transition*> transitions);
+	Etat(const std::string& code, std::set<Transition*> transitions);
 
 	Etat(const Etat&);
 
 	void setFinal(bool final);
-	void setCode(const string& code);
+	void setCode(const std::string&);
+	void setTransitions(std::set<Transition*>&);
 
 	string getCode() const;
 	bool getFinal()const;
-	set<Transition*> getTransitions() const;
+	std::set<Transition*> getTransitions() const;
 
-	void addTransition(Transition*);
+	void addTransition(char etiquette, Etat e);
 
-	bool operator<(const Etat& etat) const;
+	bool operator<(const Etat&) const;
 private:
-	string code_;
+	std::string code_;
 	bool final_;
-	set<Transition*> transitions_;
+	std::set<Transition*> transitions_;
 };
 
 #endif // !ETAT_H

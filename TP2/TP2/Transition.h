@@ -14,6 +14,8 @@ public :
 	Transition(char, Etat, Etat);
 
 	char getSortie() const;
+	Etat getEtatEntrant() const;
+	Etat getEtatSortant() const;
 
 	bool operator<(const Transition & transition) const;
 

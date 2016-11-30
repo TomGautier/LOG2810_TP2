@@ -1,59 +1,72 @@
 #include "Automate.h"
 
-
 Automate::Automate()
 {
 }
 
 Automate::~Automate()
 {
-}
-
-set<Etat> Automate::getEtats()
-{
-	return etats;
+	for (Etat* e : etats_)
+		delete e;
 }
 
 
 void Automate::creerAutomate(const string& nomFichier)
 {
 	ifstream zone;
+	string line;
 	zone.open(nomFichier);
 
 	if (zone.fail())
 		cout << "Erreur d ouverture\n";
 	else
 	{
-		while (zone.peek() != EOF) // tant que fichier pas termine
+		while (getline(zone, line)) // tant que fichier pas termine
 		{
-			string line;
-			getline(zone, line, '\n');
-
 			for (unsigned int i = 1; i <= line.size(); i++)
 			{
 				if (line[i] != ' ')
 				{
 					string subLine = line.substr(0, i);
-					Etat etat = Etat(subLine);
+					Etat* etat = nullptr;
 					
-					// Si on a les 6 caracteres du code, l'etat est final
-					if (i == line.size())
+					auto fin = etats_.end();
+					for (auto it = etats_.begin(); it != fin; it++)
 					{
-						etat.setFinal(true);
+						if ((*it)->getCode() == subLine)
+						{
+							etat = (*it);
+							break;
+						}
 					}
+					
+					
+					if (etat == nullptr)
+						etat = new Etat(subLine);
+						
+					if (i == line.size())
+						etat->setFinal(true);
 					else // palier au probleme d'ajout d'une transition vide pour les etats finaux
 					{
 						Etat etatSortant = Etat(line.substr(0, i + 1));
-						Transition* transition = new Transition(line[i], etat, etatSortant);
-						etat.addTransition(transition);
-						transitions.insert(*transition);
+
+						etat->addTransition(line[i], etatSortant);
+						transitions_.insert(line[i]);
 					}
-					
-					etats.insert(etat);
+
+					etats_.insert(etat);
 				}
 			}
 
 		}
 	}
+	
+	zone.close();
+}
+
+
+set<Etat*> Automate::getEtats()
+{
+	return etats_;
 }
 

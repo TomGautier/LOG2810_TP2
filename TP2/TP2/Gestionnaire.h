@@ -20,14 +20,14 @@ public:
 	void equilibrerFlotte();
 	void lancerSimulation();
 	
-	std::vector<Automate> getAutomates() const;
+	std::vector<Automate*> getAutomates() const;
 	Automate* getAutomate(const string& code);
-	void addAutomate(const Automate&);
+	void addAutomate(Automate*);
 private:
 	void miseAJourInformations(Vehicule* vehicule, Utilisateur* user);
 	Vehicule* trouverVehiculeDisponible(Utilisateur* user);
 
-	std::vector<Automate> automates_;
+	std::vector<Automate*> automates_;
 };
 
 #endif // !GESTIONNAIRE_H

@@ -1,3 +1,4 @@
+#include "Transition.h"
 #include "Etat.h"
 
 using namespace std;
@@ -9,6 +10,8 @@ Etat::Etat()
 
 Etat::~Etat()
 {
+	//for (Transition* t : transitions_)
+		//delete t;
 }
 
 Etat::Etat(string& code)
@@ -16,7 +19,7 @@ Etat::Etat(string& code)
 {
 }
 
-Etat::Etat(string& code, set<Transition*> transitions) {
+Etat::Etat(const string& code, set<Transition*> transitions) {
 	code_ = code;
 	transitions_ = transitions;
 }
@@ -37,6 +40,11 @@ void Etat::setCode(const string & code)
 	code_ = code;
 }
 
+void Etat::setTransitions(set<Transition*>& transitions)
+{
+	transitions_ = transitions;
+}
+
 string Etat::getCode() const
 {
 	return code_;
@@ -52,9 +60,9 @@ set<Transition*> Etat::getTransitions() const
 	return transitions_;
 }
 
-void Etat::addTransition(Transition* transition)
+void Etat::addTransition(char etiquette, Etat e)
 {
-	transitions_.insert(transition);
+	transitions_.insert(new Transition(etiquette, *this, e));
 }
 
 // Necessaire pour les set

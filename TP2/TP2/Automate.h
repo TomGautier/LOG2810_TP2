@@ -18,7 +18,7 @@ public:
 	Automate();
 	~Automate();
 
-	set<Etat> getEtats();
+	set<Etat*> getEtats();
 	//set<char> getTransition();
 
 	//Etat* parcoursAutomate(const string& mot);
@@ -26,8 +26,8 @@ public:
 	void creerAutomate(const string& nomFichier);
 	
 private:
-	set<Etat> etats;
-	set<Transition> transitions;
+	set<Etat*> etats_;
+	set<char> transitions_;
 };
 
 #endif // !AUTOMATE_H

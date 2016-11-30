@@ -10,9 +10,9 @@ Gestionnaire::~Gestionnaire()
 
 void Gestionnaire::creerLexiques(const string& nomFichier)
 {
-	Automate automate = Automate();
-	automate.creerAutomate(nomFichier);
-	addAutomate(automate);
+	Automate* automate = new Automate();
+	automate->creerAutomate(nomFichier);
+	this->addAutomate(automate);
 }
 
 void Gestionnaire::equilibrerFlotte()
@@ -69,12 +69,12 @@ void Gestionnaire::miseAJourInformations(Vehicule* vehicule, Utilisateur* user)
 	vehicule->incrementerCompteurTrajetsOccupes();*/
 }
 
-std::vector<Automate> Gestionnaire::getAutomates() const
+std::vector<Automate*> Gestionnaire::getAutomates() const
 {
-	return std::vector<Automate>();
+	return automates_;
 }
 
-void Gestionnaire::addAutomate(const Automate & automate)
+void Gestionnaire::addAutomate(Automate* automate)
 {
 	automates_.push_back(automate);
 }
