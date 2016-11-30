@@ -146,6 +146,7 @@
     <ClCompile Include="Etat.cpp" />
     <ClCompile Include="Gestionnaire.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TD2.cpp" />
     <ClCompile Include="Transition.cpp" />
     <ClCompile Include="Utilisateur.cpp" />
     <ClCompile Include="Vehicule.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Automate.h" />
     <ClInclude Include="Etat.h" />
     <ClInclude Include="Gestionnaire.h" />
+    <ClInclude Include="TD2.h" />
     <ClInclude Include="Transition.h" />
     <ClInclude Include="Utilisateur.h" />
     <ClInclude Include="Vehicule.h" />

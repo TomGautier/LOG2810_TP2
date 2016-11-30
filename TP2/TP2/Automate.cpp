@@ -1,24 +1,13 @@
 #include "Automate.h"
 
-Automate::Automate()
-{
-}
-
-Automate::~Automate()
-{
-	for (Etat* e : etats_)
-		delete e;
-}
-
-
-void Automate::creerAutomate(const string& nomFichier)
+Automate::Automate(const string& nomFichier)
 {
 	ifstream zone;
 	string line;
 	zone.open(nomFichier);
 
 	if (zone.fail())
-		cout << "Erreur d ouverture\n";
+		cout << "Erreur d'ouverture du fichier.\n";
 	else
 	{
 		while (getline(zone, line)) // tant que fichier pas termine
@@ -29,7 +18,7 @@ void Automate::creerAutomate(const string& nomFichier)
 				{
 					string subLine = line.substr(0, i);
 					Etat* etat = nullptr;
-					
+
 					auto fin = etats_.end();
 					for (auto it = etats_.begin(); it != fin; it++)
 					{
@@ -39,11 +28,11 @@ void Automate::creerAutomate(const string& nomFichier)
 							break;
 						}
 					}
-					
-					
+
+
 					if (etat == nullptr)
 						etat = new Etat(subLine);
-						
+
 					if (i == line.size())
 						etat->setFinal(true);
 					else // palier au probleme d'ajout d'une transition vide pour les etats finaux
@@ -60,12 +49,18 @@ void Automate::creerAutomate(const string& nomFichier)
 
 		}
 	}
-	
+
 	zone.close();
+
 }
 
+Automate::~Automate()
+{
+	for (Etat* e : etats_)
+		delete e;
+}
 
-set<Etat*> Automate::getEtats()
+set<Etat*> Automate::getEtats() const
 {
 	return etats_;
 }

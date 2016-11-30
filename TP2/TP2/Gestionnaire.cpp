@@ -10,8 +10,8 @@ Gestionnaire::~Gestionnaire()
 
 void Gestionnaire::creerLexiques(const string& nomFichier)
 {
-	Automate* automate = new Automate();
-	automate->creerAutomate(nomFichier);
+	Automate* automate = new Automate(nomFichier);
+	//automate->creerAutomate(nomFichier);
 	this->addAutomate(automate);
 }
 

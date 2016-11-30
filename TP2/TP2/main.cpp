@@ -1,15 +1,15 @@
 
 #include "Gestionnaire.h"
 
+#include "TD2.h"
+
 int main()
 {
-	Gestionnaire gestionnaire = Gestionnaire();
-	char option = ' ';
+	TD2 td2 = TD2();
 
-	gestionnaire.creerLexiques("zone1.txt");
+	td2.menu1();
+/*	gestionnaire.creerLexiques("zone1.txt");
 	gestionnaire.creerLexiques("zone2.txt");
 	gestionnaire.creerLexiques("zone3.txt");
-	gestionnaire.creerLexiques("zone4.txt");
-
-	cout << "Voila!";
+	gestionnaire.creerLexiques("zone4.txt");*/
 }

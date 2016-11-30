@@ -15,15 +15,13 @@ using namespace std;
 class Automate
 {
 public:
-	Automate();
+	Automate(const string&);
 	~Automate();
 
-	set<Etat*> getEtats();
-	//set<char> getTransition();
+	set<Etat*> getEtats() const;
+	set<char> getTransition() const;
 
 	//Etat* parcoursAutomate(const string& mot);
-
-	void creerAutomate(const string& nomFichier);
 	
 private:
 	set<Etat*> etats_;

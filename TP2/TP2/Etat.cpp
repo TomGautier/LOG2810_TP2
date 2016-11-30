@@ -10,8 +10,8 @@ Etat::Etat()
 
 Etat::~Etat()
 {
-	//for (Transition* t : transitions_)
-		//delete t;
+	for (Transition* t : transitions_)
+		delete t;
 }
 
 Etat::Etat(string& code)
