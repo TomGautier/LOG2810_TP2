@@ -19,13 +19,15 @@ public:
 	~Automate();
 
 	set<Etat*> getEtats() const;
-	set<char> getTransition() const;
+	set<char> getEtiquettes() const;
 
-	//Etat* parcoursAutomate(const string& mot);
+	Etat* parcoursAutomate(const string&);
 	
 private:
 	set<Etat*> etats_;
-	set<char> transitions_;
+	Etat* etatInitial_;
+	set<char> etiquettes_;
+	int nVehicules_;
 };
 
 #endif // !AUTOMATE_H

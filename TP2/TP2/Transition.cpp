@@ -10,14 +10,14 @@ Transition::~Transition()
 
 Transition::Transition(char c, Etat In, Etat Out)
 {
-	sortie_ = c;
+	etiquette_ = c;
 	etatEntrant_ = In;
 	etatSortant_ = Out;
 }
 
-char Transition::getSortie() const
+char Transition::getEtiquette() const
 {
-	return sortie_;
+	return etiquette_;
 }
 
 Etat Transition::getEtatEntrant() const
@@ -32,5 +32,5 @@ Etat Transition::getEtatSortant() const
 
 bool Transition::operator<(const Transition & transition) const
 {
-	return sortie_ < transition.getSortie();
+	return etiquette_ < transition.getEtiquette();
 }

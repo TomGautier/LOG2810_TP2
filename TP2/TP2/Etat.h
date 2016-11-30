@@ -6,7 +6,7 @@
 using namespace std;
 
 #include <string>
-#include <set>
+#include <vector>
 
 
 class Transition;
@@ -17,17 +17,17 @@ public:
 	Etat();
 	~Etat();
 	Etat(string& code);
-	Etat(const std::string& code, std::set<Transition*> transitions);
+	Etat(const std::string& code, std::vector<Transition*> transitions);
 
 	Etat(const Etat&);
 
 	void setFinal(bool final);
 	void setCode(const std::string&);
-	void setTransitions(std::set<Transition*>&);
+	void setTransitions(std::vector<Transition*>&);
 
 	string getCode() const;
-	bool getFinal()const;
-	std::set<Transition*> getTransitions() const;
+	bool isFinal()const;
+	std::vector<Transition*> getTransitions() const;
 
 	void addTransition(char etiquette, Etat e);
 
@@ -35,7 +35,7 @@ public:
 private:
 	std::string code_;
 	bool final_;
-	std::set<Transition*> transitions_;
+	std::vector<Transition*> transitions_;
 };
 
 #endif // !ETAT_H

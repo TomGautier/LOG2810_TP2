@@ -19,7 +19,7 @@ Etat::Etat(string& code)
 {
 }
 
-Etat::Etat(const string& code, set<Transition*> transitions) {
+Etat::Etat(const string& code, vector<Transition*> transitions) {
 	code_ = code;
 	transitions_ = transitions;
 }
@@ -40,7 +40,7 @@ void Etat::setCode(const string & code)
 	code_ = code;
 }
 
-void Etat::setTransitions(set<Transition*>& transitions)
+void Etat::setTransitions(vector<Transition*>& transitions)
 {
 	transitions_ = transitions;
 }
@@ -50,19 +50,28 @@ string Etat::getCode() const
 	return code_;
 }
 
-bool Etat::getFinal() const
+bool Etat::isFinal() const
 {
 	return final_;
 }
 
-set<Transition*> Etat::getTransitions() const
+vector<Transition*> Etat::getTransitions() const
 {
 	return transitions_;
 }
 
 void Etat::addTransition(char etiquette, Etat e)
 {
-	transitions_.insert(new Transition(etiquette, *this, e));
+	auto fin = transitions_.end();
+	for (auto it = transitions_.begin(); it != fin; it++)
+	{
+		if ((*it)->getEtiquette() == etiquette)
+		{
+			return;
+		}
+	}
+
+	transitions_.push_back(new Transition(etiquette, *this, e));
 }
 
 // Necessaire pour les set

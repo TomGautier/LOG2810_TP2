@@ -1,6 +1,8 @@
+#include <algorithm>
 #include "Automate.h"
 
 Automate::Automate(const string& nomFichier)
+	: nVehicules_(0), etatInitial_(nullptr)
 {
 	ifstream zone;
 	string line;
@@ -29,9 +31,11 @@ Automate::Automate(const string& nomFichier)
 						}
 					}
 
-
 					if (etat == nullptr)
 						etat = new Etat(subLine);
+
+					if (subLine.size() == 1)
+						etatInitial_ = etat;
 
 					if (i == line.size())
 						etat->setFinal(true);
@@ -40,7 +44,7 @@ Automate::Automate(const string& nomFichier)
 						Etat etatSortant = Etat(line.substr(0, i + 1));
 
 						etat->addTransition(line[i], etatSortant);
-						transitions_.insert(line[i]);
+						etiquettes_.insert(line[i]);
 					}
 
 					etats_.insert(etat);
@@ -49,13 +53,12 @@ Automate::Automate(const string& nomFichier)
 
 		}
 	}
-
 	zone.close();
-
 }
 
 Automate::~Automate()
 {
+	etatInitial_ = nullptr;
 	for (Etat* e : etats_)
 		delete e;
 }
@@ -63,5 +66,35 @@ Automate::~Automate()
 set<Etat*> Automate::getEtats() const
 {
 	return etats_;
+}
+
+set<char> Automate::getEtiquettes() const
+{
+	return etiquettes_;
+}
+
+Etat* Automate::parcoursAutomate(const string& mot)
+{
+	Etat* etatRetour = nullptr;
+	Etat* etatCourant = etatInitial_;
+	string line;
+
+	int i = 0;
+	while (!etatCourant->isFinal())
+	{
+		line = mot.substr(0, i + 1);
+		vector<Transition*> trans = etatCourant->getTransitions();
+
+		for (unsigned int i = 0; i < trans.size(); i++)
+		{
+			if (trans[i]->getEtatSortant().getCode() == line)
+			{
+				etatCourant = &(trans[i]->getEtatSortant());
+			}
+		}
+
+	}
+
+	return etatRetour;
 }
 

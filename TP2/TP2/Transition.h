@@ -13,14 +13,14 @@ public :
 
 	Transition(char, Etat, Etat);
 
-	char getSortie() const;
+	char getEtiquette() const;
 	Etat getEtatEntrant() const;
 	Etat getEtatSortant() const;
 
 	bool operator<(const Transition & transition) const;
 
 private:
-	char sortie_;
+	char etiquette_;
 	Etat etatEntrant_;
 	Etat etatSortant_;
 };

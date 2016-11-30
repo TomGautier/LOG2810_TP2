@@ -6,12 +6,13 @@ Gestionnaire::Gestionnaire()
 
 Gestionnaire::~Gestionnaire()
 {
+	for (Automate* a : automates_)
+		delete a;
 }
 
 void Gestionnaire::creerLexiques(const string& nomFichier)
 {
 	Automate* automate = new Automate(nomFichier);
-	//automate->creerAutomate(nomFichier);
 	this->addAutomate(automate);
 }
 
