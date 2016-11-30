@@ -64,7 +64,6 @@ void TD2::menu2()
 				break;
 			case 'b':
 				menuVehiculesEtClients();
-				menu3();
 				break;
 			case 'c':
 				continueProgram_ = false;
@@ -95,6 +94,7 @@ void TD2::menu3()
 				menuVehiculesEtClients();
 				break;
 			case 'c':
+				gestionnaire_.lancerSimulation();
 				break;
 			case 'd':
 				continueProgram_ = false;
@@ -153,9 +153,10 @@ void TD2::menuVehiculesEtClients()
 				switch (line[0])
 				{
 				case 'C':
-				//	gestionnaire_.creerUtilisateur()
+					gestionnaire_.creerUtilisateur(line.substr(2, 7 /*size of code postal*/), line.substr(9, 7));
 					break;
 				case 'T':
+					gestionnaire_.creerVehicule(line.substr(2, 7 /*size of code postal*/));
 					break;
 				default:
 					cout << "Erreur de format dans le fichier a la ligne : " + compteurLigne;

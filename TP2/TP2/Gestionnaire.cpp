@@ -61,9 +61,7 @@ void Gestionnaire::lancerSimulation()
 		else{
 			cout << "Aucun vehicule n'est disponible. Marche! fait du sport!";
 		}
-		
 	}
-
 }
 
 Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
@@ -72,22 +70,27 @@ Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
 	Automate* zone = trouverAutomate(user->getOrigine());
 
 	//Trouver une voiture dans le voisinage du client
-	for (unsigned int i = 0; i < vehicules_.size();i++) {
-		if (vehicules_[i]->getCode() == user->getOrigine()  && !vehicules_[i]->isOccupied())
+	for (unsigned int i = 0; i < vehicules_.size(); i++) {
+		if (vehicules_[i]->getCode() == user->getOrigine() && !vehicules_[i]->isOccupied())
+		{
 			vehicule = vehicules_[i];
+			break;
+		}
 	}
 
 	//Assigner la premiere voiture disponible dans la zone du client
 	if (vehicule == nullptr) {
-		for (unsigned int i = 0; i < vehicules_.size();i++) {
-
+		for (unsigned int i = 0; i < vehicules_.size(); i++)
+		{
 			/*
-			
 			//TODO : comparaison de deux pointeurs : ne marchera pas.
-			
 			*/
+			Automate* automate = vehicules_[i]->getZone();
 			if (vehicules_[i]->getZone() == zone && !vehicules_[i]->isOccupied())
+			{
 				vehicule = vehicules_[i];
+				break;
+			}
 		}
 	}
 
@@ -100,10 +103,6 @@ void Gestionnaire::miseAJourInformations(Vehicule* vehicule, Utilisateur* user)
 	vehicule->setZone(trouverAutomate(user->getDestination()));
 	vehicule->incrementerCompteurTrajetsOccupes();
 	vehicule->setOccupation(true);
-
-	
-
-
 }
 
 std::vector<Automate*> Gestionnaire::getAutomates() const
@@ -121,8 +120,11 @@ Automate* Gestionnaire::trouverAutomate(const string& code) const{
 	Automate* automate = nullptr;
 
 	for (unsigned int i = 0; i < automates_.size(); i++)
+	{
 		automate = automates_[i]->parcoursAutomate(code);
-
+		if (automate != nullptr)
+			break;
+	}
 	return automate;
 
 }

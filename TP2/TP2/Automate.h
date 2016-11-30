@@ -22,6 +22,9 @@ public:
 	set<char> getEtiquettes() const;
 
 	Automate* parcoursAutomate(const string&);
+
+	void decrementerNbVehicules();
+	void incrementerNbVehicules();
 	
 private:
 	Etat* createOrRetrieveEtat(const string&);

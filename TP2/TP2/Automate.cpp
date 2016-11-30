@@ -59,6 +59,16 @@ set<char> Automate::getEtiquettes() const
 	return etiquettes_;
 }
 
+void Automate::decrementerNbVehicules()
+{
+	nVehicules_++;
+}
+
+void Automate::incrementerNbVehicules()
+{
+	nVehicules_--;
+}
+
 Automate* Automate::parcoursAutomate(const string& mot)
 {
 	Etat* etatRetour = nullptr;
@@ -105,23 +115,3 @@ Etat* Automate::createOrRetrieveEtat(const string & mot)
 
 	return new Etat(mot);
 }
-
-/*
-recursive()
-{
-	vector<Transition*> trans = etatCourant->getTransitions();
-
-	for (unsigned int i = 0; i < trans.size(); i++)
-	{
-		if (trans[i]->getEtatSortant().getCode() == line)
-		{
-			etatCourant = &(trans[i]->getEtatSortant());
-			if (!etatCourant.isFinal())
-			{
-				recursive(etatCourant);
-			}
-			else return etatCourant;
-		}
-	}
-}
-*/
