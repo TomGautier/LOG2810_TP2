@@ -16,7 +16,7 @@ class Etat
 public: 
 	Etat();
 	~Etat();
-	Etat(string& code);
+	Etat(const string& code);
 	Etat(const std::string& code, std::vector<Transition*> transitions);
 
 	Etat(const Etat&);
@@ -29,7 +29,7 @@ public:
 	bool isFinal()const;
 	std::vector<Transition*> getTransitions() const;
 
-	void addTransition(char etiquette, Etat e);
+	void addTransition(char etiquette, Etat* e);
 
 	bool operator<(const Etat&) const;
 private:

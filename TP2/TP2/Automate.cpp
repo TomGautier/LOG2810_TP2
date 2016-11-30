@@ -16,43 +16,29 @@ Automate::Automate(const string& nomFichier)
 		{
 			for (unsigned int i = 1; i <= line.size(); i++)
 			{
-				if (line[i] != ' ')
+				string subLine = line.substr(0, i);
+				Etat* etat = createOrRetrieveEtat(subLine);
+
+				if (subLine.size() == 1)
+					etatInitial_ = etat;
+
+				if (i == line.size())
+					etat->setFinal(true);
+				else // palier au probleme d'ajout d'une transition vide pour les etats finaux
 				{
-					string subLine = line.substr(0, i);
-					Etat* etat = nullptr;
+					Etat* etatSortant = createOrRetrieveEtat(line.substr(0, i + 1));
+					etats_.insert(etatSortant);
 
-					auto fin = etats_.end();
-					for (auto it = etats_.begin(); it != fin; it++)
-					{
-						if ((*it)->getCode() == subLine)
-						{
-							etat = (*it);
-							break;
-						}
-					}
-
-					if (etat == nullptr)
-						etat = new Etat(subLine);
-
-					if (subLine.size() == 1)
-						etatInitial_ = etat;
-
-					if (i == line.size())
-						etat->setFinal(true);
-					else // palier au probleme d'ajout d'une transition vide pour les etats finaux
-					{
-						Etat etatSortant = Etat(line.substr(0, i + 1));
-
-						etat->addTransition(line[i], etatSortant);
-						etiquettes_.insert(line[i]);
-					}
-
-					etats_.insert(etat);
+					etat->addTransition(line[i], etatSortant);
+					etiquettes_.insert(line[i]);
 				}
+
+				etats_.insert(etat);
 			}
 
 		}
 	}
+
 	zone.close();
 }
 
@@ -73,28 +59,69 @@ set<char> Automate::getEtiquettes() const
 	return etiquettes_;
 }
 
-Etat* Automate::parcoursAutomate(const string& mot)
+Automate* Automate::parcoursAutomate(const string& mot)
 {
 	Etat* etatRetour = nullptr;
 	Etat* etatCourant = etatInitial_;
 	string line;
 
-	int i = 0;
+	bool transTrouve = false;
+
+	int i = 1;
 	while (!etatCourant->isFinal())
 	{
 		line = mot.substr(0, i + 1);
 		vector<Transition*> trans = etatCourant->getTransitions();
 
-		for (unsigned int i = 0; i < trans.size(); i++)
+		for (unsigned int j = 0; j < trans.size() && !transTrouve; j++)
 		{
-			if (trans[i]->getEtatSortant().getCode() == line)
+			if (trans[j]->getEtatSortant()->getCode() == line)
 			{
-				etatCourant = &(trans[i]->getEtatSortant());
+				etatCourant = trans[j]->getEtatSortant();
+				transTrouve = true;
 			}
 		}
 
+		if (transTrouve == false)
+			return nullptr;
+
+		transTrouve = false;
+		i++;
 	}
 
-	return etatRetour;
+	return this;
 }
 
+Etat* Automate::createOrRetrieveEtat(const string & mot)
+{
+	auto fin = etats_.end();
+	for (auto it = etats_.begin(); it != fin; it++)
+	{
+		if ((*it)->getCode() == mot)
+		{
+			return (*it);
+		}
+	}
+
+	return new Etat(mot);
+}
+
+/*
+recursive()
+{
+	vector<Transition*> trans = etatCourant->getTransitions();
+
+	for (unsigned int i = 0; i < trans.size(); i++)
+	{
+		if (trans[i]->getEtatSortant().getCode() == line)
+		{
+			etatCourant = &(trans[i]->getEtatSortant());
+			if (!etatCourant.isFinal())
+			{
+				recursive(etatCourant);
+			}
+			else return etatCourant;
+		}
+	}
+}
+*/

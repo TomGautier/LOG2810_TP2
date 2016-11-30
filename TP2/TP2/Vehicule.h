@@ -15,7 +15,7 @@ public:
 
 	Automate* getZone() const;
 	string getCode() const;
-	bool getOccupation() const;
+	bool isOccupied() const;
 
 	void setZone(Automate*);
 	void setCode(const string&);

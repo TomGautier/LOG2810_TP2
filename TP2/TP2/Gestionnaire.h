@@ -16,18 +16,25 @@ public:
 	Gestionnaire();
 	~Gestionnaire();
 	
-	void creerLexiques(const string& nomFichier);
+	void creerLexiques(const string&);
+	void creerVehicule(const string&);
+	void creerUtilisateur(const string& , const string&);
+	
+	Automate* trouverAutomate(const string& code) const;
+
 	void equilibrerFlotte();
 	void lancerSimulation();
 	
 	std::vector<Automate*> getAutomates() const;
-	Automate* getAutomate(const string& code);
+	Automate* getAutomate(const string& );
 	void addAutomate(Automate*);
 private:
 	void miseAJourInformations(Vehicule* vehicule, Utilisateur* user);
 	Vehicule* trouverVehiculeDisponible(Utilisateur* user);
 
 	std::vector<Automate*> automates_;
+	std::vector<Vehicule*> vehicules_;
+	std::vector<Utilisateur*> utilisateurs_;
 };
 
 #endif // !GESTIONNAIRE_H

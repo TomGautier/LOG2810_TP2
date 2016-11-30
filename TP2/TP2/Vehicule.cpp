@@ -10,7 +10,7 @@ Vehicule::~Vehicule()
 	delete automate_;
 }
 
-Vehicule::Vehicule(Automate* automate, const string & code, bool occupation)
+Vehicule::Vehicule(Automate* automate,const string & code, bool occupation)
 	: code_(code), occupation_(occupation), nTrajetsOccupes_(0), nTrajetsVides_(0)
 {
 	automate_ = automate;
@@ -26,7 +26,7 @@ string Vehicule::getCode() const
 	return code_;
 }
 
-bool Vehicule::getOccupation() const
+bool Vehicule::isOccupied() const
 {
 	return occupation_;
 }

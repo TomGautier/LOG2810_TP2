@@ -153,6 +153,7 @@ void TD2::menuVehiculesEtClients()
 				switch (line[0])
 				{
 				case 'C':
+				//	gestionnaire_.creerUtilisateur()
 					break;
 				case 'T':
 					break;

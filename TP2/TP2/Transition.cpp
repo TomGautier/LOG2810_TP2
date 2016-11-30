@@ -8,7 +8,7 @@ Transition::~Transition()
 {
 }
 
-Transition::Transition(char c, Etat In, Etat Out)
+Transition::Transition(char c, Etat* In, Etat* Out)
 {
 	etiquette_ = c;
 	etatEntrant_ = In;
@@ -20,12 +20,12 @@ char Transition::getEtiquette() const
 	return etiquette_;
 }
 
-Etat Transition::getEtatEntrant() const
+Etat* Transition::getEtatEntrant() const
 {
 	return etatEntrant_;
 }
 
-Etat Transition::getEtatSortant() const
+Etat* Transition::getEtatSortant() const
 {
 	return etatSortant_;
 }

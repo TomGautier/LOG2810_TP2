@@ -14,7 +14,7 @@ Etat::~Etat()
 		delete t;
 }
 
-Etat::Etat(string& code)
+Etat::Etat(const string& code)
 	: code_(code), final_(false)
 {
 }
@@ -60,7 +60,7 @@ vector<Transition*> Etat::getTransitions() const
 	return transitions_;
 }
 
-void Etat::addTransition(char etiquette, Etat e)
+void Etat::addTransition(char etiquette, Etat* e)
 {
 	auto fin = transitions_.end();
 	for (auto it = transitions_.begin(); it != fin; it++)
@@ -71,7 +71,7 @@ void Etat::addTransition(char etiquette, Etat e)
 		}
 	}
 
-	transitions_.push_back(new Transition(etiquette, *this, e));
+	transitions_.push_back(new Transition(etiquette, this, e));
 }
 
 // Necessaire pour les set

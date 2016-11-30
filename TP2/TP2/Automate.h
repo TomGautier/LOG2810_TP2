@@ -21,9 +21,11 @@ public:
 	set<Etat*> getEtats() const;
 	set<char> getEtiquettes() const;
 
-	Etat* parcoursAutomate(const string&);
+	Automate* parcoursAutomate(const string&);
 	
 private:
+	Etat* createOrRetrieveEtat(const string&);
+
 	set<Etat*> etats_;
 	Etat* etatInitial_;
 	set<char> etiquettes_;

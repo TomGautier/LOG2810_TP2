@@ -13,4 +13,10 @@ int main()
 	gestionnaire.creerLexiques("zone2.txt");
 	gestionnaire.creerLexiques("zone3.txt");
 	gestionnaire.creerLexiques("zone4.txt");
+
+	vector<Automate*> automates = gestionnaire.getAutomates();
+
+	Automate* automate = automates[0]->parcoursAutomate("H1A 0A1");
+
+	cout << "Voila!" << endl;
 }

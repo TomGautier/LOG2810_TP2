@@ -11,18 +11,18 @@ public :
 	Transition();
 	~Transition();
 
-	Transition(char, Etat, Etat);
+	Transition(char, Etat*, Etat*);
 
 	char getEtiquette() const;
-	Etat getEtatEntrant() const;
-	Etat getEtatSortant() const;
+	Etat* getEtatEntrant() const;
+	Etat* getEtatSortant() const;
 
 	bool operator<(const Transition & transition) const;
 
 private:
 	char etiquette_;
-	Etat etatEntrant_;
-	Etat etatSortant_;
+	Etat* etatEntrant_;
+	Etat* etatSortant_;
 };
 
 #endif // !TRANSITION_H
