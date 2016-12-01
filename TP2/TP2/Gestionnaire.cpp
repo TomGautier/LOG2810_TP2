@@ -42,8 +42,8 @@ void Gestionnaire::equilibrerFlotte()
 		int diff = Max->getNvehicules() - nbrVehicule;
 		while (Max->getNvehicules() - nbrVehicule >= 2){
 			SwapVehicule(automates_[i], Max);
-			Max = trouverMax();
 		}
+		Max = trouverMax();
 	}
 	
 }

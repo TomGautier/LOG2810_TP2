@@ -29,16 +29,21 @@ int main()
 	//Vehicule* vehicule2Zone2 = new Vehicule(automate, "H1B 1R1", false);
 	gestionnaire.creerVehicule("H1A 5B5");
 	gestionnaire.creerVehicule("H1B 1R1");
+	
 
 	//Vehicule* vehicule1Zone3 = new Vehicule(automate, "H1B 5W5", false);
 	//Vehicule* vehicule2Zone3 = new Vehicule(automate, "H1C 0B2", false);
 	gestionnaire.creerVehicule("H1B 5W5");
 	gestionnaire.creerVehicule("H1C 0B2");
+	gestionnaire.creerVehicule("H1C 0B5");
+	gestionnaire.creerVehicule("H1C 0C9");
+	gestionnaire.creerVehicule("H1C 0E9");
 
 	//Vehicule* vehicule1Zone4 = new Vehicule(automate, "H1C 1L5", false);
 	//Vehicule* vehicule2Zone4 = new Vehicule(automate, "H1A 1M4", false);
 	gestionnaire.creerVehicule("H1C 1L5");
 	gestionnaire.creerVehicule("H1C 1M4");
+	gestionnaire.creerVehicule("H1C 1K4");
 
 	// Creation de clients 
 
