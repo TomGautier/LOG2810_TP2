@@ -35,22 +35,55 @@ void Gestionnaire::creerUtilisateur(const string& origine, const string& destina
 
 void Gestionnaire::equilibrerFlotte()
 {
-	/*int i = 0;
-	string mot = "";
-	while (mot.length() != user.getdestination().length()) {
-		auto it = automates_[i].getEtats().begin();
+	int j = 0;
+	Automate* Max = trouverMax();
+	for (unsigned int i = 0; i < automates_.size(); i++){
+		int nbrVehicule = automates_[i]->getNvehicules();
+		int diff = Max->getNvehicules() - nbrVehicule;
+		while (Max->getNvehicules() - nbrVehicule >= 2){
+			SwapVehicule(automates_[i], Max);
+			Max = trouverMax();
+		}
+	}
+	
+}
 
-		//premier caractere
-		while (it != automates_[i].getEtats().end()) {
-			if (user->getDestination()[0] == it->getCode()[0]) {
-				mot = it->getCode()[0];
+void Gestionnaire::SwapVehicule(Automate* automate1, Automate* automate2){
+	for (unsigned int i = 0; i < vehicules_.size(); i++){
+		if (vehicules_[i]->getZone() == automate2 && !vehicules_[i]->isOccupied()){
+			automate2->decrementerNbVehicules();
+			automate1->incrementerNbVehicules();
+			vehicules_[i]->setZone(automate1);
+			vehicules_[i]->incrementerCompteurTrajetsVides();
+			return;
+		}
+	}
+}
+
+
+Automate* Gestionnaire::trouverMax(){
+	
+	int maximum = 0;
+	Automate* automate = nullptr;
+
+	if (!automates_.empty()){
+		for (unsigned int i = 0; i < automates_.size(); i++){
+			if (automates_[i]->getNvehicules() > maximum){
+				maximum = automates_[i]->getNvehicules();
+				automate = automates_[i];
 			}
 		}
-	}*/
+	}
+	return automate;
 }
 
 void Gestionnaire::lancerSimulation()
 {
+	vector<int> nbVehiculesinitial;
+	for (unsigned int k = 0; k < automates_.size(); k++){
+		nbVehiculesinitial.push_back(automates_[k]->getNvehicules());
+	}
+
 	for (unsigned int i = 0; i < utilisateurs_.size(); i++)
 	{
 		Vehicule* vehicule = trouverVehiculeDisponible(utilisateurs_[i]);
@@ -59,9 +92,21 @@ void Gestionnaire::lancerSimulation()
 			equilibrerFlotte();
 		}
 		else{
-			cout << "Aucun vehicule n'est disponible. Marche! fait du sport!";
+			cout << "Aucun vehicule n'est disponible.";
 		}
 	}
+	for (unsigned int j = 0; j < vehicules_.size(); j++){
+		cout << endl;
+		cout << "Vehicule " << j << endl;
+		cout << "Nombres de trajets avec un occupant : " <<vehicules_[j]->getNtrajetsOccupes() <<endl;
+		cout << "Nombres de trajets a vide : "<< vehicules_[j]->getNtrajetsVides() << endl;
+	}
+
+	for (unsigned int n = 0; n < nbVehiculesinitial.size(); n++){
+		cout << "nombre de vehicules au debut de la simulation pour l'automate " << n << " : " << nbVehiculesinitial[n] <<endl;
+		cout << "nombre de vehicules a la fin de la simulation pour l'automate " << n << " : " << automates_[n]->getNvehicules() <<endl <<endl;
+	}
+
 }
 
 Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
@@ -82,9 +127,6 @@ Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
 	if (vehicule == nullptr) {
 		for (unsigned int i = 0; i < vehicules_.size(); i++)
 		{
-			/*
-			//TODO : comparaison de deux pointeurs : ne marchera pas.
-			*/
 			Automate* automate = vehicules_[i]->getZone();
 			if (vehicules_[i]->getZone() == zone && !vehicules_[i]->isOccupied())
 			{

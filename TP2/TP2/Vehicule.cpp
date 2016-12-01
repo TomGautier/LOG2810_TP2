@@ -33,6 +33,15 @@ bool Vehicule::isOccupied() const
 	return occupation_;
 }
 
+int Vehicule::getNtrajetsOccupes() const{
+	return nTrajetsOccupes_;
+}
+
+int Vehicule::getNtrajetsVides() const{
+	return nTrajetsVides_;
+}
+
+
 void Vehicule::setZone(Automate* automate)
 {
 	zone_ = automate;

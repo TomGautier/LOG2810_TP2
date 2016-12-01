@@ -20,6 +20,7 @@ public:
 
 	set<Etat*> getEtats() const;
 	set<char> getEtiquettes() const;
+	int getNvehicules() const;
 
 	Automate* parcoursAutomate(const string&);
 

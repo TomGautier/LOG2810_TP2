@@ -19,8 +19,11 @@ public:
 	void creerLexiques(const string&);
 	void creerVehicule(const string&);
 	void creerUtilisateur(const string& , const string&);
-	
+
 	Automate* trouverAutomate(const string& code) const;
+	Automate* Gestionnaire::trouverMax();
+
+	void SwapVehicule(Automate*, Automate*);
 
 	void equilibrerFlotte();
 	void lancerSimulation();

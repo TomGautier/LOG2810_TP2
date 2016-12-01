@@ -9,7 +9,7 @@ int main()
 	TD2 td2 = TD2();
 
 	//td2.menu1();
-
+	
 	// Création des automates correspondant à chaque zone
 
 	gestionnaire.creerLexiques("zone1.txt");
@@ -17,11 +17,7 @@ int main()
 	gestionnaire.creerLexiques("zone3.txt");
 	gestionnaire.creerLexiques("zone4.txt");
 
-	vector<Automate*> automates = gestionnaire.getAutomates();
-
-	Automate* automate = automates[0]->parcoursAutomate("H1A 0A1");
-
-	/*Utilises pour tests manuels:*/
+	//Utilises pour tests manuels:
 
 	// Creation de vehicules
 	//Vehicule* vehicule1Zone1 = new Vehicule(automate, "H1A 0A1", false);
@@ -44,7 +40,7 @@ int main()
 	gestionnaire.creerVehicule("H1C 1L5");
 	gestionnaire.creerVehicule("H1C 1M4");
 
-	/* Creation de clients */
+	// Creation de clients 
 
 	// Depart et arrivee dans la même zone
 	gestionnaire.creerUtilisateur("H1A 0A1", "H1A 4B5"); // zone 1 -> zone 1
@@ -58,6 +54,6 @@ int main()
 
 	gestionnaire.lancerSimulation();
 
-
+	
 	cout << "Voila!" << endl;
 }

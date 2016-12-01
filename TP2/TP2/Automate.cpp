@@ -59,6 +59,11 @@ set<char> Automate::getEtiquettes() const
 	return etiquettes_;
 }
 
+int Automate::getNvehicules() const{
+	return nVehicules_;
+}
+
+
 void Automate::decrementerNbVehicules()
 {
 	nVehicules_--;
