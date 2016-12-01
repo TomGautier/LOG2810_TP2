@@ -6,12 +6,12 @@ Gestionnaire::Gestionnaire()
 
 Gestionnaire::~Gestionnaire()
 {
-	for (Automate* a : automates_)
+	/*for (Automate* a : automates_)
 		delete a;
 	for (Vehicule* v : vehicules_)
 		delete v;
 	for (Utilisateur* u : utilisateurs_)
-		delete u;
+		delete u;*/
 }
 
 void Gestionnaire::creerLexiques(const string& nomFichier)
@@ -99,10 +99,15 @@ Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
 
 void Gestionnaire::miseAJourInformations(Vehicule* vehicule, Utilisateur* user)
 {
+	Automate* automateDepart = trouverAutomate(user->getOrigine());
+	Automate* automateArrivee = trouverAutomate(user->getDestination());
+
 	vehicule->setCode(user->getDestination());
-	vehicule->setZone(trouverAutomate(user->getDestination()));
+	vehicule->setZone(automateArrivee);
 	vehicule->incrementerCompteurTrajetsOccupes();
 	vehicule->setOccupation(true);
+	automateArrivee->incrementerNbVehicules();
+	automateDepart->decrementerNbVehicules();
 }
 
 std::vector<Automate*> Gestionnaire::getAutomates() const

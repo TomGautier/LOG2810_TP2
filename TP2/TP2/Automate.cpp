@@ -61,12 +61,12 @@ set<char> Automate::getEtiquettes() const
 
 void Automate::decrementerNbVehicules()
 {
-	nVehicules_++;
+	nVehicules_--;
 }
 
 void Automate::incrementerNbVehicules()
 {
-	nVehicules_--;
+	nVehicules_++;
 }
 
 Automate* Automate::parcoursAutomate(const string& mot)

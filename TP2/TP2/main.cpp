@@ -42,13 +42,13 @@ int main()
 	//Vehicule* vehicule1Zone4 = new Vehicule(automate, "H1C 1L5", false);
 	//Vehicule* vehicule2Zone4 = new Vehicule(automate, "H1A 1M4", false);
 	gestionnaire.creerVehicule("H1C 1L5");
-	gestionnaire.creerVehicule("H1A 1M4");
+	gestionnaire.creerVehicule("H1C 1M4");
 
 	/* Creation de clients */
 
 	// Depart et arrivee dans la même zone
-	gestionnaire.creerUtilisateur("H1A 0A1", "H1A 4B5"); // zone 1
-	gestionnaire.creerUtilisateur("H1B 0A1", "H1C 0B3"); // zone 3
+	gestionnaire.creerUtilisateur("H1A 0A1", "H1A 4B5"); // zone 1 -> zone 1
+	gestionnaire.creerUtilisateur("H1B 1P5", "H1C 0B3"); // zone 2 -> zone 3
 	// Départ zone 1 arrivée zone 4
 	gestionnaire.creerUtilisateur("H1A 0A1", "H1C 1M6");
 	// Départ zone 2 arrivée zone 3
