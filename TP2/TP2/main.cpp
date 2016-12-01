@@ -8,8 +8,8 @@ int main()
 	Gestionnaire gestionnaire = Gestionnaire();
 	TD2 td2 = TD2();
 
-	//td2.menu1();
-	
+	td2.menu1();
+	/*
 	// Création des automates correspondant à chaque zone
 
 	gestionnaire.creerLexiques("zone1.txt");
@@ -59,6 +59,6 @@ int main()
 
 	gestionnaire.lancerSimulation();
 
-	
+	*/
 	cout << "Voila!" << endl;
 }

@@ -6,18 +6,21 @@ Gestionnaire::Gestionnaire()
 
 Gestionnaire::~Gestionnaire()
 {
-	/*for (Automate* a : automates_)
-		delete a;
-	for (Vehicule* v : vehicules_)
-		delete v;
-	for (Utilisateur* u : utilisateurs_)
-		delete u;*/
+	for (unsigned int i = 0; i < automates_.size(); i++)
+		delete automates_[i];
+	for (unsigned int i = 0; i < vehicules_.size(); i++)
+		delete vehicules_[i];
+	for (unsigned int i = 0; i < utilisateurs_.size(); i++)
+		delete utilisateurs_[i];
 }
 
 void Gestionnaire::creerLexiques(const string& nomFichier)
 {
 	Automate* automate = new Automate(nomFichier);
-	this->addAutomate(automate);
+	if (automate->getEtats().size()){
+		addAutomate(automate);
+		cout << "Automate cree." << endl;
+	}
 }
 
 void Gestionnaire::creerVehicule(const string& code) 
@@ -26,11 +29,21 @@ void Gestionnaire::creerVehicule(const string& code)
 	if (zone != nullptr)
 		vehicules_.push_back(new Vehicule(zone, code, false));
 	else
-		cout << "Code inexistant." << endl;
+		cout << "\nERROR Vehicule non cree : Code inexistant." << endl;
 }
 
 void Gestionnaire::creerUtilisateur(const string& origine, const string& destination ) {
-	utilisateurs_.push_back(new Utilisateur(origine, destination));
+	
+	Automate* depart = trouverAutomate(origine);
+	Automate* arrivee = trouverAutomate(destination);
+	if (depart != nullptr && arrivee != nullptr)
+		utilisateurs_.push_back(new Utilisateur(origine, destination));
+	else if (depart != nullptr && arrivee == nullptr)
+		cout << "\nERROR Client non cree : la destination du client est inexistante." << endl;
+	else if (depart == nullptr && arrivee != nullptr)
+		cout << "\nERROR Client non cree : l'origine du client est inexistante." << endl;
+	else
+		cout << "\nERROR Client non cree : L'origine et la destination du client sont inexistantes." << endl;
 }
 
 void Gestionnaire::equilibrerFlotte()
@@ -150,12 +163,22 @@ void Gestionnaire::miseAJourInformations(Vehicule* vehicule, Utilisateur* user)
 	vehicule->setOccupation(true);
 	automateArrivee->incrementerNbVehicules();
 	automateDepart->decrementerNbVehicules();
+	vehicule->setOccupation(false);
 }
 
 std::vector<Automate*> Gestionnaire::getAutomates() const
 {
 	return automates_;
 }
+
+std::vector<Utilisateur*> Gestionnaire::getUtilisateurs() const{
+	return utilisateurs_;
+}
+
+std::vector<Vehicule*> Gestionnaire::getVehicules() const{
+	return vehicules_;
+}
+
 
 void Gestionnaire::addAutomate(Automate* automate)
 {

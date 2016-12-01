@@ -29,7 +29,9 @@ public:
 	void lancerSimulation();
 	
 	std::vector<Automate*> getAutomates() const;
-	//Automate* getAutomate(const string& );
+	std::vector<Utilisateur*> getUtilisateurs() const;
+	std::vector<Vehicule*> getVehicules() const;
+
 	void addAutomate(Automate*);
 private:
 	void miseAJourInformations(Vehicule* vehicule, Utilisateur* user);
