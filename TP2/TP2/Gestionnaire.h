@@ -17,7 +17,7 @@ public:
 	~Gestionnaire();
 	
 	// Methodes de creation des attributs avec verification des parametres (utilisées par la classe TD2)
-	void creerLexiques(const string&);
+	void creerLexiques(const string&); // Méthode C1
 	void creerVehicule(const string&);
 	void creerUtilisateur(const string& , const string&);
 
