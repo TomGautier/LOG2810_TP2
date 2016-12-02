@@ -30,7 +30,6 @@ Automate::Automate(const string& nomFichier)
 					etats_.insert(etatSortant);
 
 					etat->addTransition(line[i], etatSortant);
-					etiquettes_.insert(line[i]);
 				}
 
 				etats_.insert(etat);
@@ -52,11 +51,6 @@ Automate::~Automate()
 set<Etat*> Automate::getEtats() const
 {
 	return etats_;
-}
-
-set<char> Automate::getEtiquettes() const
-{
-	return etiquettes_;
 }
 
 int Automate::getNvehicules() const{

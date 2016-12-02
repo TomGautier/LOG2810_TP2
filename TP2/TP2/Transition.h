@@ -17,8 +17,6 @@ public :
 	Etat* getEtatEntrant() const;
 	Etat* getEtatSortant() const;
 
-	bool operator<(const Transition & transition) const;
-
 private:
 	char etiquette_;
 	Etat* etatEntrant_;

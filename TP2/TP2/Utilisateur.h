@@ -15,6 +15,7 @@ public :
 
 	std::string getOrigine() const;
 	std::string getDestination() const;
+
 private:
 	std::string origine_;
 	std::string destination_;

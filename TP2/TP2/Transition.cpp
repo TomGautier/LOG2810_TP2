@@ -30,7 +30,3 @@ Etat* Transition::getEtatSortant() const
 	return etatSortant_;
 }
 
-bool Transition::operator<(const Transition & transition) const
-{
-	return etiquette_ < transition.getEtiquette();
-}

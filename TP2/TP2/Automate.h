@@ -19,7 +19,6 @@ public:
 	~Automate();
 
 	set<Etat*> getEtats() const;
-	set<char> getEtiquettes() const;
 	int getNvehicules() const;
 
 	Automate* parcoursAutomate(const string&);
@@ -32,7 +31,6 @@ private:
 
 	set<Etat*> etats_;
 	Etat* etatInitial_;
-	set<char> etiquettes_;
 	int nVehicules_;
 };
 
