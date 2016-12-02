@@ -176,51 +176,5 @@ void TD2::menuVehiculesEtClients()
 			cout << optionInvalide;
 			break;
 		}
-
-
-
-		/*<< "Chaque entree du fichier doit etre sur une ligne differente et etre sous la forme : " << endl
-		<< " - pour un client : C point_de_depart (ex: H1B 2K1) point_darrivee (ex: H1A 5K2)" << endl
-		<< " - pour un taxi : T zone_de_depart (ex: H1B)" << endl << endl
-		<< "Entrez -1 pour terminer." << endl;*/
-
-
-
-		/*while (nomFichier != "-1")
-		{
-		ifstream fichierClients;
-		string line;
-		int compteurLigne = 0;
-
-		cin >> nomFichier;
-
-		fichierClients.open(nomFichier);
-
-		if (fichierClients.fail())
-		cout << "Erreur d'ouverture du fichier.\n";
-		else
-		{
-		while (getline(fichierClients, line)) // tant que fichier pas termine
-		{
-		compteurLigne++;
-
-		switch (line[0])
-		{
-		case 'C':
-		gestionnaire_.creerUtilisateur(line.substr(2, 7 /*size of code postal), line.substr(9, 7));
-		break;
-		case 'T':
-		gestionnaire_.creerVehicule(line.substr(2, 7 /*size of code postal));
-		break;
-		default:
-		cout << "Erreur de format dans le fichier a la ligne : " + compteurLigne;
-		}
-		}
-		}
-		}*/
-
-
-
-
 	}
 }

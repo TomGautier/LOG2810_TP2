@@ -62,6 +62,7 @@ vector<Transition*> Etat::getTransitions() const
 
 void Etat::addTransition(char etiquette, Etat* e)
 {
+	// On vérifie d'abord si la transition existe déjà
 	auto fin = transitions_.end();
 	for (auto it = transitions_.begin(); it != fin; it++)
 	{

@@ -18,11 +18,15 @@ public:
 	Automate(const string&);
 	~Automate();
 
+	// Accesseur
 	set<Etat*> getEtats() const;
 	int getNvehicules() const;
 
+	// Méthode de parcours de l'automate
+	// Elle permet de vérifier si un zip-code fait bien partie de l'automate
 	Automate* parcoursAutomate(const string&);
 
+	// Modificateurs
 	void decrementerNbVehicules();
 	void incrementerNbVehicules();
 	

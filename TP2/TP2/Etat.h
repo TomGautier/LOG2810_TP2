@@ -21,16 +21,20 @@ public:
 
 	Etat(const Etat&);
 
+	// Modificateurs
 	void setFinal(bool final);
 	void setCode(const std::string&);
 	void setTransitions(std::vector<Transition*>&);
 
+	// Accesseurs
 	string getCode() const;
 	bool isFinal()const;
 	std::vector<Transition*> getTransitions() const;
 
+	// Encapsulation de l'attribut transitions_;
 	void addTransition(char etiquette, Etat* e);
 
+	// Surchage de l'operator < pour l'utilisation de Set d'Etats
 	bool operator<(const Etat&) const;
 private:
 	std::string code_;

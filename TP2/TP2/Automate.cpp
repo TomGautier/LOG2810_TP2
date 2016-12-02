@@ -19,12 +19,14 @@ Automate::Automate(const string& nomFichier)
 				string subLine = line.substr(0, i);
 				Etat* etat = createOrRetrieveEtat(subLine);
 
+				// On assume que l'etat initial est toujours le même 
+				// (c'est à dire que la première lettre des zipcodes est toujours la même pour toutes les zones)
 				if (subLine.size() == 1)
 					etatInitial_ = etat;
 
 				if (i == line.size())
 					etat->setFinal(true);
-				else // palier au probleme d'ajout d'une transition vide pour les etats finaux
+				else // palie au probleme d'ajout d'une transition vide pour les etats finaux
 				{
 					Etat* etatSortant = createOrRetrieveEtat(line.substr(0, i + 1));
 					etats_.insert(etatSortant);
@@ -70,13 +72,14 @@ void Automate::incrementerNbVehicules()
 
 Automate* Automate::parcoursAutomate(const string& mot)
 {
-	Etat* etatRetour = nullptr;
+	// etat auquel on est rendu
 	Etat* etatCourant = etatInitial_;
 	string line;
 
 	bool transTrouve = false;
 
 	int i = 1;
+	// Si l'etat est final, on a trouvé le zip-code dans l'automate !
 	while (!etatCourant->isFinal())
 	{
 		line = mot.substr(0, i + 1);
@@ -84,13 +87,15 @@ Automate* Automate::parcoursAutomate(const string& mot)
 
 		for (unsigned int j = 0; j < trans.size() && !transTrouve; j++)
 		{
+			// Si le code de l'etat sortant est le code que l'on cherche
 			if (trans[j]->getEtatSortant()->getCode() == line)
 			{
+				// cet etat devient l'etat courant
 				etatCourant = trans[j]->getEtatSortant();
 				transTrouve = true;
 			}
 		}
-
+		// Si on a pas trouvé la transition correspondante, le zip-code ne fait donc pas partie de l'automate
 		if (transTrouve == false)
 			return nullptr;
 
@@ -108,9 +113,11 @@ Etat* Automate::createOrRetrieveEtat(const string & mot)
 	{
 		if ((*it)->getCode() == mot)
 		{
+			// Retourne l'Etat s'il existe deja
 			return (*it);
 		}
 	}
 
+	// En cree un nouveau sinon
 	return new Etat(mot);
 }

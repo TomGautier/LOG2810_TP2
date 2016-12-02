@@ -12,7 +12,8 @@ public :
 	~Transition();
 
 	Transition(char, Etat*, Etat*);
-
+	
+	// Accesseurs
 	char getEtiquette() const;
 	Etat* getEtatEntrant() const;
 	Etat* getEtatSortant() const;

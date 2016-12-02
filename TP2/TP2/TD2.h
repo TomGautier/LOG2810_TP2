@@ -13,6 +13,8 @@ public:
 	TD2();
 	~TD2();
 
+	// Menus appelés simultanément lorsqu'assez d'informations sont fournies pour rendre
+	// disponible les options présentées
 	void menu1();
 	void menu2();
 	void menu3();

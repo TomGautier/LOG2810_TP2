@@ -13,6 +13,7 @@ public :
 
 	Utilisateur(const std::string& origine, const std::string& destination);
 
+	// Accesseurs
 	std::string getOrigine() const;
 	std::string getDestination() const;
 

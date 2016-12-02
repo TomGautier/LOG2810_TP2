@@ -13,13 +13,14 @@ public:
 	~Vehicule();
 	Vehicule(Automate*, const string&, bool);
 
+	// Accesseurs
 	Automate* getZone() const;
 	string getCode() const;
 	bool isOccupied() const;
 	int getNtrajetsOccupes() const;
 	int getNtrajetsVides() const;
 
-
+	// Modificateurs
 	void setZone(Automate*);
 	void setCode(const string&);
 	void setOccupation(bool);

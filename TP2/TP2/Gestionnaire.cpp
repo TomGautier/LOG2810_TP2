@@ -25,6 +25,7 @@ void Gestionnaire::creerLexiques(const string& nomFichier)
 
 void Gestionnaire::creerVehicule(const string& code) 
 {
+	// On cherche la zone à laquelle appartient le véhicule
 	Automate* zone = trouverAutomate(code);
 	if (zone != nullptr){
 		vehicules_.push_back(new Vehicule(zone, code, false));
@@ -34,8 +35,9 @@ void Gestionnaire::creerVehicule(const string& code)
 		cout << "\nERROR Vehicule non cree : Code inexistant." << endl;
 }
 
-void Gestionnaire::creerUtilisateur(const string& origine, const string& destination ) {
-	
+void Gestionnaire::creerUtilisateur(const string& origine, const string& destination )
+{
+	// On cherche les zones correspondantes
 	Automate* depart = trouverAutomate(origine);
 	Automate* arrivee = trouverAutomate(destination);
 	if (depart != nullptr && arrivee != nullptr){
@@ -54,9 +56,11 @@ void Gestionnaire::equilibrerFlotte()
 {
 	int j = 0;
 	Automate* Max = trouverMax();
-	for (unsigned int i = 0; i < automates_.size(); i++){
+	for (unsigned int i = 0; i < automates_.size(); i++)
+	{
 		int nbrVehicule = automates_[i]->getNvehicules();
 		int diff = Max->getNvehicules() - nbrVehicule;
+		//On équilibre entre les automates jusqu'à avoir au plus 2 véhicules d'écart
 		while (Max->getNvehicules() - nbrVehicule >= 2){
 			SwapVehicule(automates_[i], Max);
 		}
@@ -96,11 +100,13 @@ Automate* Gestionnaire::trouverMax(){
 
 void Gestionnaire::lancerSimulation()
 {
+	// On stocke le nombre initial de véhicules de chaque zone
 	vector<int> nbVehiculesinitial;
 	for (unsigned int k = 0; k < automates_.size(); k++){
 		nbVehiculesinitial.push_back(automates_[k]->getNvehicules());
 	}
 
+	// On effectue les déplacements de chaque utilisateurs en équilibrant la flotte
 	for (unsigned int i = 0; i < utilisateurs_.size(); i++)
 	{
 		Vehicule* vehicule = trouverVehiculeDisponible(utilisateurs_[i]);
@@ -112,18 +118,21 @@ void Gestionnaire::lancerSimulation()
 			cout << "\nAucun vehicule n'est disponible.\n";
 		}
 	}
+
+	// Affichage du nombre de trajets avec occupant et à vide pour chaque véhicule
 	for (unsigned int j = 0; j < vehicules_.size(); j++){
 		cout << endl;
-		cout << "Vehicule " << j << endl;
+		cout << "VEHICULE " << j << endl;
 		cout << "Nombres de trajets avec un occupant : " <<vehicules_[j]->getNtrajetsOccupes() <<endl;
 		cout << "Nombres de trajets a vide : "<< vehicules_[j]->getNtrajetsVides() << endl;
 	}
 
+	// Affichage du nombre de véhicules par zones avant et après la simulation.
 	for (unsigned int n = 0; n < nbVehiculesinitial.size(); n++){
-		cout << "\nnombre de vehicules au debut de la simulation pour l'automate " << n << " : " << nbVehiculesinitial[n] <<endl;
-		cout << "nombre de vehicules a la fin de la simulation pour l'automate " << n << " : " << automates_[n]->getNvehicules() <<endl <<endl;
+		cout << "AUTOMATE " << n << endl
+			<< "\nNombre de vehicules au debut de la simulation : " << nbVehiculesinitial[n] << endl;
+		cout << "Nombre de vehicules a la fin de la simulation pour l'automate " << n << " : " << automates_[n]->getNvehicules() <<endl <<endl;
 	}
-
 }
 
 Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
@@ -131,7 +140,7 @@ Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
 	Vehicule* vehicule = nullptr;
 	Automate* zone = trouverAutomate(user->getOrigine());
 
-	//Trouver une voiture dans le voisinage du client
+	// Trouver une voiture dans le voisinage du client s'il y en a une
 	for (unsigned int i = 0; i < vehicules_.size(); i++) {
 		if (vehicules_[i]->getCode() == user->getOrigine() && !vehicules_[i]->isOccupied())
 		{
@@ -140,7 +149,7 @@ Vehicule* Gestionnaire::trouverVehiculeDisponible(Utilisateur* user)
 		}
 	}
 
-	//Assigner la premiere voiture disponible dans la zone du client
+	//Sinon, on assigne la premiere voiture disponible dans la zone du client
 	if (vehicule == nullptr) {
 		for (unsigned int i = 0; i < vehicules_.size(); i++)
 		{
