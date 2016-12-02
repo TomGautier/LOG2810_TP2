@@ -26,8 +26,10 @@ void Gestionnaire::creerLexiques(const string& nomFichier)
 void Gestionnaire::creerVehicule(const string& code) 
 {
 	Automate* zone = trouverAutomate(code);
-	if (zone != nullptr)
+	if (zone != nullptr){
 		vehicules_.push_back(new Vehicule(zone, code, false));
+		cout << "\nVehicule " << vehicules_.size() - 1 << " cree" << endl;
+	}
 	else
 		cout << "\nERROR Vehicule non cree : Code inexistant." << endl;
 }
@@ -36,8 +38,10 @@ void Gestionnaire::creerUtilisateur(const string& origine, const string& destina
 	
 	Automate* depart = trouverAutomate(origine);
 	Automate* arrivee = trouverAutomate(destination);
-	if (depart != nullptr && arrivee != nullptr)
+	if (depart != nullptr && arrivee != nullptr){
 		utilisateurs_.push_back(new Utilisateur(origine, destination));
+		cout << "\nClient " <<utilisateurs_.size()-1 <<" cree"<< endl;
+	}
 	else if (depart != nullptr && arrivee == nullptr)
 		cout << "\nERROR Client non cree : la destination du client est inexistante." << endl;
 	else if (depart == nullptr && arrivee != nullptr)
@@ -105,7 +109,7 @@ void Gestionnaire::lancerSimulation()
 			equilibrerFlotte();
 		}
 		else{
-			cout << "Aucun vehicule n'est disponible.";
+			cout << "\nAucun vehicule n'est disponible.\n";
 		}
 	}
 	for (unsigned int j = 0; j < vehicules_.size(); j++){
@@ -116,7 +120,7 @@ void Gestionnaire::lancerSimulation()
 	}
 
 	for (unsigned int n = 0; n < nbVehiculesinitial.size(); n++){
-		cout << "nombre de vehicules au debut de la simulation pour l'automate " << n << " : " << nbVehiculesinitial[n] <<endl;
+		cout << "\nnombre de vehicules au debut de la simulation pour l'automate " << n << " : " << nbVehiculesinitial[n] <<endl;
 		cout << "nombre de vehicules a la fin de la simulation pour l'automate " << n << " : " << automates_[n]->getNvehicules() <<endl <<endl;
 	}
 

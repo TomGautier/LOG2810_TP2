@@ -162,9 +162,9 @@ void TD2::menuVehiculesEtClients()
 				cout << "Entrez la postion actuelle du vehicule : (Ex: H1A 0A1)\n";
 				cin.ignore();
 				getline(cin, code);
+				gestionnaire_.creerVehicule(code);
 				cout << "\nVoulez vous entrez un autre vehicule :\nEntrez o (pour oui) ou n (pour non) " << endl;
 				cin >> choix;
-				gestionnaire_.creerVehicule(code);
 				if (choix == "n")
 					vehicule = false;
 			}
